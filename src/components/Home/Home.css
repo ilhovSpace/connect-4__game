@@ -1,0 +1,25 @@
+.home{
+  max-width: 800px;
+  max-height: 800px;
+  margin: auto;
+}
+.home-header{
+  text-align: center;
+  padding-top: 30%;
+  font-size: 2rem;
+  font-weight: bold;
+}
+.home-menu{
+  display: flex;
+  justify-content: center;
+}
+.home-menu__items{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 20px;
+}
+.home-menu__items > button {
+  margin-bottom: 20px;
+  width: 200px;
+}

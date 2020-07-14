@@ -1,0 +1,10 @@
+.game{
+  padding-top: 70px;
+}
+.game-info{
+  text-align: center;
+}
+.menu-action{
+  display: flex;
+  justify-content: center;
+}
