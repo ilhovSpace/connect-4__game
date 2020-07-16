@@ -5,8 +5,7 @@ import { getGameState, findLowestEmptyIndex } from "../../../utils/gameCheck";
 import { initializeBoard } from "../../../utils/initialData";
 import GameOverMenu from "../GameOverMenu";
 import Cells from "../Cells";
-
-import "./Board.css";
+import useStyles from './Board.styles'
 
 interface BoardProps {
   activePlayer: number;
@@ -22,6 +21,7 @@ const Board: React.FC<BoardProps> = ({
   const [board, setBoard] = useState<number[]>(initializeBoard());
   const [gameOverMenu, setGameOverMenu] = useState<boolean>(false);
   const [winner, setWinner] = useState<string>("");
+  const classes = useStyles()
 
   const handleCellClick = (index: number): void => {
     const column = index % 7;
@@ -59,7 +59,7 @@ const Board: React.FC<BoardProps> = ({
 
   return (
     <div>
-      <div className="board">
+      <div className={classes.board}>
         <Cells board={board} handleCellClick={handleCellClick} />
         <GameOverMenu
           handleClose={handleCloseGameOverMenu}
@@ -68,7 +68,7 @@ const Board: React.FC<BoardProps> = ({
           winner={winner}
         />
       </div>
-      <div className="board-action">
+      <div className={classes.action}>
         <Button variant="contained" color="primary" onClick={restartGame}>
           Начать заново
         </Button>

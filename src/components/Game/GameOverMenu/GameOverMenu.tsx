@@ -23,7 +23,7 @@ const GameOverMenu: React.FC<GameOverMenu> = ({
         <DialogTitle>{"Собери 4"}</DialogTitle>
         <DialogContent>
           <p>{winner}</p>
-          <div className="menu-action">
+          <div style={{textAlign: 'center'}}>
             <Button variant="contained" color="primary" onClick={restart}>
               Начать заново
             </Button>

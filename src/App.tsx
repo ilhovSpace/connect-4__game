@@ -1,18 +1,20 @@
 import React, { useState } from "react";
 import Home from "./components/Home";
 import Game from "./components/Game";
+import useStyles from './App.styles'
 
-import "./App.css";
+
 
 const App: React.FC = () => {
   const [game, setGame] = useState<boolean>(false);
+  const classes = useStyles()
 
   const startNewGame = (): void => {
     setGame(true);
   };
 
   return (
-    <div className="container">
+    <div className={classes.root}>
       {game ? <Game /> : <Home newGame={startNewGame} />}
     </div>
   );

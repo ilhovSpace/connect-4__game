@@ -1,13 +1,13 @@
 
 
-export const findLowestEmptyIndex = (board, column) => {
+export const findLowestEmptyIndex = (board: number[], column: number) => {
   for (let i = 35 + column; i >= 0; i -= 7){
     if(board[i]===0) return i
   }
   return -1
 }
 
-export const checkWinningSlice = (miniBoard) => {
+export const checkWinningSlice = (miniBoard: number[]) => {
   if(miniBoard.some(cell => cell === 0)) return false;
   if(miniBoard[0] === miniBoard[1] 
     && miniBoard[1]  === miniBoard[2] 
@@ -16,7 +16,7 @@ export const checkWinningSlice = (miniBoard) => {
     }
 }
 
-export const getGameState = (board) => {
+export const getGameState = (board: number[]) => {
   //hor
   for(let i = 0; i < board.length; i += 7){
      const boardRow = board.slice(i, i + 7)
