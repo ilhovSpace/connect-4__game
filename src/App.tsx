@@ -1,20 +1,21 @@
 import React, { useState } from "react";
+import { BrowserRouter, Switch, Route, Router } from "react-router-dom";
 import Home from "./components/Home";
 import Game from "./components/Game";
-
-import "./App.css";
+import useStyles from "./App.styles";
 
 const App: React.FC = () => {
-  const [game, setGame] = useState<boolean>(false);
-
-  const startNewGame = (): void => {
-    setGame(true);
-  };
+  const classes = useStyles();
 
   return (
-    <div className="container">
-      {game ? <Game /> : <Home newGame={startNewGame} />}
-    </div>
+    <BrowserRouter>
+      <div className={classes.root}>
+        <Switch>
+          <Route component={Home} path="/" exact />
+          <Route component={Game} path="/game" exact />
+        </Switch>
+      </div>
+    </BrowserRouter>
   );
 };
 

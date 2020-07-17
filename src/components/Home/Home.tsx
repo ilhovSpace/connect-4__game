@@ -1,24 +1,30 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
+import useStyles from "./Home.styles";
+import ModalWindow from "../ModalWindow";
 
-import About from "../About";
-import "./Home.css";
+const Home: React.FC = () => {
+  const classes = useStyles();
 
-interface HomeProps {
-  newGame(): void;
-}
-
-const Home: React.FC<HomeProps> = (props) => {
-  const { newGame } = props;
   return (
-    <div className="home">
-      <div className="home-header">Собери 4-ку</div>
-      <div className="home-menu">
-        <div className="home-menu__items">
-          <Button variant="contained" color="secondary" onClick={newGame}>
-            Новая игра
-          </Button>
-          <About />
+    <div className={classes.home}>
+      <div className={classes.header}>Собери 4-ку</div>
+      <div className={classes.menu}>
+        <div className={classes.menuItems}>
+          <Link to="game">
+            <Button variant="contained" color="secondary">
+              Новая игра
+            </Button>
+          </Link>
+          <ModalWindow
+            buttonName="Правила игры"
+            windowTitle="Правила игры Собери 4-ку"
+          >
+            Ходите по очереди, пока один из игроков не соберет 4 фишки своего
+            цвета в ряд — по горизонтали, по вертикали или по диагонали. Если вы
+            первым собрали 4 фишки в ряд, вы побеждаете!
+          </ModalWindow>
         </div>
       </div>
     </div>

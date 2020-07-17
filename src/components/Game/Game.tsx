@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import Board from "./Board";
-
-import "./Game.css";
+import useStyles from "./Game.styles";
 
 const Game: React.FC = () => {
   const [activePlayer, setActivePlayer] = useState<number>(1);
+  const classes = useStyles();
 
   const togglePlayerTurn = (): void => {
     const nextPlayer = activePlayer === 1 ? 2 : 1;
@@ -12,8 +12,8 @@ const Game: React.FC = () => {
   };
 
   return (
-    <div className="game">
-      <div className="game-info">
+    <div className={classes.game}>
+      <div className={classes.info}>
         <p>Сейчас ходит:</p>
         <p>Игрок {activePlayer === 1 ? "1 Желтые" : "2 Красные"}</p>
       </div>
