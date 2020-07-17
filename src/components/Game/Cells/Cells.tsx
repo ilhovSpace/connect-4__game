@@ -1,6 +1,6 @@
 import React from "react";
-import clsx from 'clsx';
-import useStyles from './Cell.styles'
+import clsx from "clsx";
+import useStyles from "./Cell.styles";
 
 interface CellsProps {
   board: number[];
@@ -9,16 +9,17 @@ interface CellsProps {
 }
 
 const Cells: React.FC<CellsProps> = ({ board, handleCellClick }) => {
-  const classes = useStyles()
+  const classes = useStyles();
   return (
     <>
       {board.map((cell, index) => {
-        let color = ''
-        if(cell){ 
-          color = cell === 1 ? classes.playerOne : classes.playerTwo
+        let color = "";
+        if (cell) {
+          color = cell === 1 ? classes.playerOne : classes.playerTwo;
         }
         return (
-          <div className={clsx(classes.cell, color)}
+          <div
+            className={clsx(classes.cell, color)}
             onClick={() => handleCellClick(index)}
             key={index}
           ></div>

@@ -1,5 +1,3 @@
-
-
 export const findLowestEmptyIndex = (board: number[], column: number) => {
   for (let i = 35 + column; i >= 0; i -= 7){
     if(board[i]===0) return i
@@ -25,6 +23,7 @@ export const getGameState = (board: number[]) => {
       const result = checkWinningSlice(rowSlice)
       if(result){
         return `Выиграл игрок ${result}. Он собрал 4 по горизонтали` 
+
       }
     }
   }

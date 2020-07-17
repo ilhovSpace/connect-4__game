@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
 
+import { Link } from "react-router-dom";
 import { getGameState, findLowestEmptyIndex } from "../../../utils/gameCheck";
 import { initializeBoard } from "../../../utils/initialData";
 import GameOverMenu from "../GameOverMenu";
+import ModalWindow from "../../ModalWindow";
 import Cells from "../Cells";
-import useStyles from './Board.styles'
+import useStyles from "./Board.styles";
 
 interface BoardProps {
   activePlayer: number;
   togglePlayerTurn(): void;
-  setActivePlayer: (a: number)=> void;
+  setActivePlayer: (a: number) => void;
 }
 
 const Board: React.FC<BoardProps> = ({
@@ -21,7 +23,8 @@ const Board: React.FC<BoardProps> = ({
   const [board, setBoard] = useState<number[]>(initializeBoard());
   const [gameOverMenu, setGameOverMenu] = useState<boolean>(false);
   const [winner, setWinner] = useState<string>("");
-  const classes = useStyles()
+  const [results, setResults] = useState<string[]>([]);
+  const classes = useStyles();
 
   const handleCellClick = (index: number): void => {
     const column = index % 7;
@@ -32,6 +35,7 @@ const Board: React.FC<BoardProps> = ({
       setBoard(newBoard);
       getGameState(newBoard);
       togglePlayerTurn();
+      setWinner("");
     }
   };
 
@@ -49,6 +53,11 @@ const Board: React.FC<BoardProps> = ({
   const handleCloseGameOverMenu = (): void => {
     setGameOverMenu(false);
   };
+  useEffect(() => {
+    if (winner.length) {
+      setResults([winner, ...results]);
+    }
+  }, [winner]);
 
   useEffect(() => {
     const result = getGameState(board);
@@ -69,9 +78,27 @@ const Board: React.FC<BoardProps> = ({
         />
       </div>
       <div className={classes.action}>
-        <Button variant="contained" color="primary" onClick={restartGame}>
-          Начать заново
-        </Button>
+        <div className={classes.wrapper}>
+          <Button variant="contained" color="primary" onClick={restartGame}>
+            Начать заново
+          </Button>
+          <Link to="/">
+            <Button variant="contained" color="primary">
+              Меню
+            </Button>
+          </Link>
+          <ModalWindow buttonName="Результаты" windowTitle="Результаты игр">
+            {!results.length ? (
+              <div>Пока нет результатов</div>
+            ) : (
+              <ul>
+                {results.map((item, index) => {
+                  return <li key={index}>{item}</li>;
+                })}
+              </ul>
+            )}
+          </ModalWindow>
+        </div>
       </div>
     </div>
   );

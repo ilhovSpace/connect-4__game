@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import Board from "./Board";
-import useStyles from './Game.styles'
+import useStyles from "./Game.styles";
 
 const Game: React.FC = () => {
   const [activePlayer, setActivePlayer] = useState<number>(1);
-  const classes = useStyles()
+  const classes = useStyles();
 
   const togglePlayerTurn = (): void => {
     const nextPlayer = activePlayer === 1 ? 2 : 1;
