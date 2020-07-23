@@ -1,28 +1,47 @@
 import React from "react";
-import clsx from "clsx";
-import useStyles from "./Cell.styles";
-
+import Cell from "../Cell";
+import { countDelay } from "../../../utils/gameCheck";
 interface CellsProps {
   board: number[];
-  handleCellClick: (index: number) => void;
+  column: number;
+  indexAction: number;
+  activePlayer: number;
+  handleCellClick: any;
   onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
-const Cells: React.FC<CellsProps> = ({ board, handleCellClick }) => {
-  const classes = useStyles();
+const Cells: React.FC<CellsProps> = (props) => {
+  const { board, column, indexAction, activePlayer, handleCellClick } = props;
+
   return (
     <>
       {board.map((cell, index) => {
-        let color = "";
-        if (cell) {
-          color = cell === 1 ? classes.playerOne : classes.playerTwo;
+        let cellColor = "white";
+        let animationColor = "";
+        let animationName = "";
+        let delay: any = 0;
+        if (cell && index !== indexAction) {
+          cellColor = cell === 1 ? "gold" : "red";
+        }
+        if (index === indexAction) {
+          animationName = "ariseAnimation";
+          animationColor = cell === 1 ? "gold" : "red";
+          delay = countDelay();
+        }
+        if (index % 7 === column && cell === 0) {
+          animationName =
+            activePlayer === 2 ? "fallAnimationGold" : "fallAnimationRed";
+          delay = countDelay();
         }
         return (
-          <div
-            className={clsx(classes.cell, color)}
-            onClick={() => handleCellClick(index)}
+          <Cell
+            cellColor={cellColor}
+            animationColor={animationColor}
+            animationName={animationName}
+            handleCellClick={() => handleCellClick(index)}
+            delay={delay}
             key={index}
-          ></div>
+          ></Cell>
         );
       })}
     </>

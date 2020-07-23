@@ -5,6 +5,24 @@ export const findLowestEmptyIndex = (board: number[], column: number) => {
   return -1
 }
 
+const changeCount = (newCount?:number) => {
+  let count = 0
+  if(newCount){
+    count = newCount
+  }
+return count
+}
+
+
+let count = -0.54
+export const countDelay = (reset?:any) => {
+  if(reset){
+    count = -0.54
+  }
+  count = count + 0.27
+  return count 
+}
+
 export const checkWinningSlice = (miniBoard: number[]) => {
   if(miniBoard.some(cell => cell === 0)) return false;
   if(miniBoard[0] === miniBoard[1] 

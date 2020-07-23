@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { BrowserRouter, Switch, Route, Router } from "react-router-dom";
+import React from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Home from "./components/Home";
 import Game from "./components/Game";
 import useStyles from "./App.styles";

@@ -8,6 +8,7 @@ import GameOverMenu from "../GameOverMenu";
 import ModalWindow from "../../ModalWindow";
 import Cells from "../Cells";
 import useStyles from "./Board.styles";
+import { countDelay } from "../../../utils/gameCheck";
 
 interface BoardProps {
   activePlayer: number;
@@ -24,6 +25,8 @@ const Board: React.FC<BoardProps> = ({
   const [gameOverMenu, setGameOverMenu] = useState<boolean>(false);
   const [winner, setWinner] = useState<string>("");
   const [results, setResults] = useState<string[]>([]);
+  const [column, setColumn] = useState<any>(null);
+  const [indexAction, setIndexAction] = useState<any>(null);
   const classes = useStyles();
 
   const handleCellClick = (index: number): void => {
@@ -32,10 +35,13 @@ const Board: React.FC<BoardProps> = ({
     if (lowestIndex !== -1) {
       const newBoard = [...board];
       newBoard[lowestIndex] = activePlayer;
+      countDelay("reset");
       setBoard(newBoard);
       getGameState(newBoard);
       togglePlayerTurn();
       setWinner("");
+      setColumn(column);
+      setIndexAction(lowestIndex);
     }
   };
 
@@ -43,6 +49,8 @@ const Board: React.FC<BoardProps> = ({
     setBoard(initializeBoard());
     setActivePlayer(1);
     handleCloseGameOverMenu();
+    setColumn(null);
+    setIndexAction(null);
   };
 
   const handleOpenGameOverMenu = (result: string): void => {
@@ -55,9 +63,10 @@ const Board: React.FC<BoardProps> = ({
   };
   useEffect(() => {
     if (winner.length) {
-      setResults([winner, ...results]);
+      const preResult = [...results]
+      setResults([winner, ...preResult]);
     }
-  }, [winner]);
+  },[winner]);
 
   useEffect(() => {
     const result = getGameState(board);
@@ -69,7 +78,13 @@ const Board: React.FC<BoardProps> = ({
   return (
     <div>
       <div className={classes.board}>
-        <Cells board={board} handleCellClick={handleCellClick} />
+        <Cells
+          board={board}
+          column={column}
+          indexAction={indexAction}
+          handleCellClick={handleCellClick}
+          activePlayer={activePlayer}
+        />
         <GameOverMenu
           handleClose={handleCloseGameOverMenu}
           gameOverMenu={gameOverMenu}
