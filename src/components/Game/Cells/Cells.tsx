@@ -16,10 +16,10 @@ const Cells: React.FC<CellsProps> = (props) => {
   return (
     <>
       {board.map((cell, index) => {
-        let cellColor = "white";
-        let animationColor = "";
-        let animationName = "";
-        let delay: any = 0;
+        let cellColor: string = "white";
+        let animationColor: string = "";
+        let animationName: string = "";
+        let delay: number = 0;
         if (cell && index !== indexAction) {
           cellColor = cell === 1 ? "gold" : "red";
         }

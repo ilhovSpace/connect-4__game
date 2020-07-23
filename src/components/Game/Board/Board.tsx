@@ -86,7 +86,6 @@ const Board: React.FC<BoardProps> = ({
           activePlayer={activePlayer}
         />
         <GameOverMenu
-          handleClose={handleCloseGameOverMenu}
           gameOverMenu={gameOverMenu}
           restart={restartGame}
           winner={winner}

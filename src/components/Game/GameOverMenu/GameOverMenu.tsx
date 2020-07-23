@@ -5,14 +5,12 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
 interface GameOverMenu {
-  handleClose(): void;
   restart(): void;
   gameOverMenu: boolean;
   winner: string;
 }
 
 const GameOverMenu: React.FC<GameOverMenu> = ({
-  handleClose,
   gameOverMenu,
   restart,
   winner,
